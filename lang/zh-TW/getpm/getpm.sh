@@ -377,7 +377,7 @@ else
 				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
 				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
 				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " done"
+				echo " 完成"
 				alldone=yes
 			else
 				echo " 檢測到無效的建構檔"
