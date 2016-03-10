@@ -14,3 +14,5 @@ system is not completed (系統未完成)
 ### 用法
 * wget -q -O - http://getpm.reh.tw/ | bash
 * 下載完執行 `./select-lang.sh` 選擇語言
+* 下載完執行 `./select-core.sh` 選擇PM核心
+* 開始下載 **PocketMine-MP**
