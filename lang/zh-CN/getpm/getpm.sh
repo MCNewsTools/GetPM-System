@@ -35,7 +35,7 @@ while getopts "arxucid:v:" opt; do
       ;;
     x)
 	  XDEBUG="on"
-	  echo "[+] Enabling xdebug"
+	  echo "[+] 正在启用 xdebug"
       ;;
     u)
 	  update=on
@@ -53,7 +53,7 @@ while getopts "arxucid:v:" opt; do
 	  CHANNEL="$OPTARG"
       ;;
     \?)
-      echo "Invalid option: -$OPTARG" >&2
+      echo "无效选项: -$OPTARG" >&2
 	  exit 1
       ;;
   esac
@@ -78,7 +78,7 @@ else
 			alias download_file="curl --silent --location"
 		fi
 	else
-		echo "error, curl or wget not found"
+		echo "错误，找不到 curl 或是 wget"
 	fi
 fi
 
@@ -99,10 +99,10 @@ function check_signature {
 	echo "[*] Checking signature of $1"
 	"$GPG_BIN" --keyserver "$GPG_KEYSERVER" --keyserver-options auto-key-retrieve=1 --trusted-key $PUBLICKEY_LONGID --verify "$1.sig" "$1"
 	if [ $? -eq 0 ]; then
-		echo "[+] Signature valid and checked!"
+		echo "[+] 签署已被检查并确认为有效！"
 	else
 		"$GPG_BIN" --refresh-keys > /dev/null 2>&1
-		echo "[!] Invalid signature! Please check for file corruption or a wrongly imported public key (signed by $PUBLICKEY_FINGERPRINT)"
+		echo "[!] 签署无效！请检查是否汇入了错误的密钥或是密钥已经损毁 (由 $PUBLICKEY_FINGERPRINT 签署)"
 		exit 1
 	fi	
 }
@@ -135,7 +135,7 @@ if [ "$GPG_SIGNATURE" != "" ]; then
 fi
 
 if [ "$VERSION" == "" ]; then
-	echo "[!] Couldn't get the latest $NAME version"
+	echo "[!] 无法取得 $NAME 最新的版本"
 	exit 1
 fi
 
@@ -166,21 +166,21 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	fi
 fi
 
-echo "[*] Found $NAME $BASE_VERSION (build $BUILD) using API $API_VERSION"
-echo "[*] Details: $VERSION_DETAILS"
+echo "[*] 找到 $NAME $BASE_VERSION - 建构档 $BUILD (API: $API_VERSION)"
+echo "[*] 详细资料: $VERSION_DETAILS"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
-	echo "[+] The build was signed, will check signature"
+	echo "[+] 建构档已被签署，即将检查签署是否有效"
 elif [ "$GPG_SIGNATURE" == "" ]; then
 	if [[ "$CHANNEL" == "beta" ]] || [[ "$CHANNEL" == "stable" ]]; then
-		echo "[-] This channel should have a signature, none found"
+		echo "[-] 找不到任何签署资料"
 	fi
 fi
 
-echo "[*] Installing/updating $NAME on directory $INSTALL_DIRECTORY"
+echo "[*] 正在于路径 $INSTALL_DIRECTORY 为 $NAME 进行安装/更新"
 mkdir -m 0777 "$INSTALL_DIRECTORY" 2> /dev/null
 cd "$INSTALL_DIRECTORY"
-echo "[1/3] Cleaning..."
+echo "[1/3] 正在清理环境..."
 rm -f "$NAME.phar"
 rm -f README.md
 rm -f CONTRIBUTING.md
@@ -192,13 +192,13 @@ rm -f start.bat
 rm -f PocketMine-MP.php
 rm -r -f src/
 
-echo -n "[2/3] Downloading $NAME $VERSION phar..."
+echo -n "[2/3] 正在下载 $NAME $VERSION phar档..."
 set +e
 download_file "$VERSION_DOWNLOAD" > "$NAME.phar"
 if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; then
 	rm "$NAME.phar" 2> /dev/null
-	echo " failed!"
-	echo "[!] Couldn't download $NAME automatically from $VERSION_DOWNLOAD"
+	echo " 失败！"
+	echo "[!] 无法从 $VERSION_DOWNLOAD 自动下载 $NAME"
 	exit 1
 else
 	if [ "$CHANNEL" == "soft" ]; then
@@ -217,7 +217,7 @@ fi
 chmod +x compile.sh
 chmod +x start.sh
 
-echo " done!"
+echo " 完成！"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
 	download_file "$GPG_SIGNATURE" > "$NAME.phar.sig"
@@ -225,10 +225,10 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 fi
 
 if [ "$update" == "on" ]; then
-	echo "[3/3] Skipping PHP recompilation due to user request"
+	echo "[3/3] 按照用户的要求，正在跳过 PHP 重新编译程序"
 else
-	echo -n "[3/3] Obtaining PHP:"
-	echo " detecting if build is available..."
+	echo -n "[3/3] 正在获取 PHP:"
+	echo " 正在检查是否有可用的建构档..."
 	if [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Darwin" ]; then
 		set +e
 		UNAME_M=$(uname -m)
@@ -236,12 +236,12 @@ else
 		set -e
 		if [[ "$IS_IOS" -gt 0 ]]; then
 			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] iOS PHP build available, downloading $IOS_BUILD.tar.gz..."
+			echo -n "[3/3] 发现可用的 iOS PHP 建构档，正在下载 $IOS_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " checking..."
+			echo -n " 正在进行检查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " regenerating php.ini..."
+				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
 				echo "" > "./bin/php7/bin/php.ini"
 				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
@@ -254,22 +254,22 @@ else
 				echo " done"
 				alldone=yes
 			else
-				echo " invalid build detected"
+				echo " 检测到无效的建构档"
 			fi
 		else
 			rm -r -f bin/ >> /dev/null 2>&1
 			if [ `getconf LONG_BIT` == "64" ]; then
-				echo -n "[3/3] MacOS 64-bit PHP build available, downloading $MAC_64_BUILD.tar.gz..."
+				echo -n "[3/3] 发现可用的 MacOS 64位元 PHP 建构档，正在下载 $MAC_64_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_64_BUILD"
 			else
-				echo -n "[3/3] MacOS 32-bit PHP build available, downloading $MAC_32_BUILD.tar.gz..."
+				echo -n "[3/3] 发现可用的 MacOS 32位元 PHP 建构档，正在下载 $MAC_32_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_32_BUILD"
 			fi
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " checking..."
+			echo -n " 正在进行检查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " regenerating php.ini..."
+				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
 				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
@@ -297,7 +297,7 @@ else
 				echo " done"
 				alldone=yes
 			else
-				echo " invalid build detected"
+				echo " 检测到无效的建构档"
 			fi
 		fi
 	else
@@ -309,12 +309,12 @@ else
 		IS_ODROID=$?
 		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] Raspberry Pi PHP build available, downloading $RPI_BUILD.tar.gz..."
+			echo -n "[3/3] 发现可用的 Raspberry Pi PHP 建构档，正在下载 $RPI_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " checking..."
+			echo -n " 正在进行检查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " regenerating php.ini..."
+				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
 				if [ "$XDEBUG" == "on" ]; then
@@ -344,16 +344,16 @@ else
 				echo " done"
 				alldone=yes
 			else
-				echo " invalid build detected"
+				echo " 检测到无效的建构档"
 			fi
 		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] ODROID PHP build available, downloading $ODROID_BUILD.tar.gz..."
+			echo -n "[3/3] 发现可用的 ODROID PHP 建构档，正在下载 $ODROID_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " checking..."
+			echo -n " 正在进行检查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " regenerating php.ini..."
+				echo -n " 正在重新生成 php.ini..."
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
 				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
 				echo "" > "./bin/php7/bin/php.ini"
@@ -380,34 +380,34 @@ else
 				echo " done"
 				alldone=yes
 			else
-				echo " invalid build detected"
+				echo " 检测到无效的建构档"
 			fi
 		elif [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Linux" ]; then
 			rm -r -f bin/ >> /dev/null 2>&1
 			
 			if [[ "$(cat /etc/redhat-release 2>/dev/null)" == *CentOS* ]]; then
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/3] CentOS 64-bit PHP build available, downloading $CENTOS_64_BUILD.tar.gz..."
+					echo -n "[3/3] 发现可用的 CentOS 64位元 PHP 建构档，正在下载 $CENTOS_64_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_64_BUILD"
 				else
-					echo -n "[3/3] CentOS 32-bit PHP build available, downloading $CENTOS_32_BUILD.tar.gz..."
+					echo -n "[3/3] 发现可用的 CentOS 32位元 PHP 建构档，正在下载 $CENTOS_32_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_32_BUILD"
 				fi
 			else
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/3] Linux 64-bit PHP build available, downloading $LINUX_64_BUILD.tar.gz..."
+					echo -n "[3/3] 发现可用的 Linux 64位元 PHP 建构档，正在下载 $LINUX_64_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_64_BUILD"
 				else
-					echo -n "[3/3] Linux 32-bit PHP build available, downloading $LINUX_32_BUILD.tar.gz..."
+					echo -n "[3/3] 发现可用的 Linux 32位元 PHP 建构档，正在下载 $LINUX_32_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_32_BUILD"
 				fi
 			fi
 			
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " checking..."
+			echo -n " 正在进行检查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " regenerating php.ini..."
+				echo -n " 正在重新生成 php.ini..."
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
 				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
 				echo "" > "./bin/php7/bin/php.ini"
@@ -433,12 +433,12 @@ else
 				echo " done"
 				alldone=yes
 			else
-				echo " invalid build detected, please upgrade your OS"
+				echo " 检测到无效的建构档，请更新你的作业系统"
 			fi
 		fi
 		if [ "$alldone" == "no" ]; then
 			set -e
-			echo "[3/3] no build found, compiling PHP automatically"
+			echo "[3/3] 找不到可用的建构档，正在自动编译 PHP"
 			exec "./compile.sh"
 		fi
 	fi
@@ -446,5 +446,5 @@ fi
 
 rm compile.sh
 
-echo "[*] Everything done! Run ./start.sh to start $NAME"
+echo "[*] 完成！输入 ./start.sh 以运行 $NAME"
 exit 0
