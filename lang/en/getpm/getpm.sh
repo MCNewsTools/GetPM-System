@@ -112,10 +112,8 @@ fi
 
 if [ "$(uname -s)" == "Darwin" ]; then
 	BASE_VERSION=$(echo "$VERSION" | sed -E 's/([A-Za-z0-9_\.]*).*/\1/')
-	VERSION_DATE_STRING=$(date -j -f "%s" $VERSION_DATE)
 else
 	BASE_VERSION=$(echo "$VERSION" | sed -r 's/([A-Za-z0-9_\.]*).*/\1/')
-	VERSION_DATE_STRING=$(date --date="@$VERSION_DATE")
 fi
 
 GPG_SIGNATURE=$(echo "$VERSION_DATA" | grep '"signature_url"' | cut -d ':' -f2- | tr -d ' ",')
@@ -157,6 +155,7 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 fi
 
 echo "[*] Found $NAME $BASE_VERSION (build $BUILD) using API $API_VERSION"
+echo "[*] This $CHANNEL build was released on $VERSION_DATE"
 echo "[*] Details: $VERSION_DETAILS"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
@@ -220,8 +219,8 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	check_signature "$NAME.phar"
 fi
 
-wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php7/ | bash
-wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php5/ | bash
+wget -q -O - http://getpm.reh.tw/lang/en/getpm/php7/ | bash
+wget -q -O - http://getpm.reh.tw/lang/en/getpm/php5/ | bash
 rm compile.sh
 
 echo "[*] =========================================="

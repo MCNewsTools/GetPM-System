@@ -112,10 +112,8 @@ fi
 
 if [ "$(uname -s)" == "Darwin" ]; then
 	BASE_VERSION=$(echo "$VERSION" | sed -E 's/([A-Za-z0-9_\.]*).*/\1/')
-	VERSION_DATE_STRING=$(date -j -f "%s" $VERSION_DATE)
 else
 	BASE_VERSION=$(echo "$VERSION" | sed -r 's/([A-Za-z0-9_\.]*).*/\1/')
-	VERSION_DATE_STRING=$(date --date="@$VERSION_DATE")
 fi
 
 GPG_SIGNATURE=$(echo "$VERSION_DATA" | grep '"signature_url"' | cut -d ':' -f2- | tr -d ' ",')
@@ -157,6 +155,7 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 fi
 
 echo "[*] 找到 $NAME $BASE_VERSION - 建构档 $BUILD (API: $API_VERSION)"
+echo "[*] 此 $CHANNEL 建构档发布于 $VERSION_DATE"
 echo "[*] 详细资料: $VERSION_DETAILS"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
