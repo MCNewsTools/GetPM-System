@@ -24,4 +24,4 @@ system is not completed (系統未完成)
 
 ### 目前已添加PM核心
 * [Genisys](https://github.com/iTXTech/Genisys)
-* [pmb 生成核心](https://github.com/PEMapModder/pmwatch)
+* [pmb 生成核心](http://pmt.mcpe.me/pmb/)
