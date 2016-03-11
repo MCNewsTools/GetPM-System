@@ -22,6 +22,8 @@ system is not completed (系統未完成)
 * PHP5：`wget -q -O - http://getpm.reh.tw/php5/ | bash`
 * PHP7：`wget -q -O - http://getpm.reh.tw/php7/ | bash`
 
+[更多的 PocketMine-MP PHP檔案](http://getpm.reh.tw/PocketMine/PHP/)
+
 ### 目前已添加PM核心
 * [Genisys](https://github.com/iTXTech/Genisys)
 * [pmb 生成核心](http://pmt.mcpe.me/pmb/)
