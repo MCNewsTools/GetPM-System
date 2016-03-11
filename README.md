@@ -12,7 +12,7 @@ system is not completed (系統未完成)
 * 隨時更新的非官方 wget PocketMine-MP 下載伺服器
 
 ### 用法
-* wget -q -O - http://getpm.reh.tw/ | bash
+* 執行 `wget -q -O - http://getpm.reh.tw/ | bash`
 * 下載完執行 `./select-lang.sh` 選擇語言
 * 下載完執行 `./select-core.sh` 選擇PM核心
 * 開始下載 **PocketMine-MP**
