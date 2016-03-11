@@ -18,7 +18,7 @@ system is not completed (系統未完成)
 * 開始下載 **PocketMine-MP**
 
 ### PocketMine-MP PHP下載
-如果您只要下載 PocketMine-MP PHP，請執行下方用法
+如果您只需要下載 PocketMine-MP PHP，請執行下方用法
 * PHP5：`wget -q -O - http://getpm.reh.tw/php5/ | bash`
 * PHP7：`wget -q -O - http://getpm.reh.tw/php7/ | bash`
 
