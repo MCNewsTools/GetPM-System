@@ -17,6 +17,11 @@ system is not completed (系統未完成)
 * 下載完執行 `./select-core.sh` 選擇PM核心
 * 開始下載 **PocketMine-MP**
 
+### PHP下載
+如果您只要下載PHP，請執行下方用法
+* PHP5：`wget -q -O - http://getpm.reh.tw/php5/ | bash`
+* PHP7：`wget -q -O - http://getpm.reh.tw/php7/ | bash`
+
 ### 目前已添加PM核心
 * [Genisys](https://github.com/iTXTech/Genisys)
 * [pmb 生成核心](https://github.com/PEMapModder/pmwatch)
