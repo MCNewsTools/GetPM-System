@@ -4,7 +4,7 @@
 rm select-lang.sh
 echo "选择 PocketMine 核心"
 echo "（1）genisys (0.14 | PHP7)"
-echo "（2）pmb (0.14 | PHP5)"
+echo "（2）pmb (0.14 | PHP7)"
 echo "=========================================="
 echo -n "输入："
 
