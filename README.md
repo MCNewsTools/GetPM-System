@@ -18,5 +18,5 @@ system is not completed (系統未完成)
 * 開始下載 **PocketMine-MP**
 
 ### 目前已添加PM核心
-* [genisys](https://github.com/iTXTech/Genisys)
+* [Genisys](https://github.com/iTXTech/Genisys)
 * [pmb 生成核心](https://github.com/PEMapModder/pmwatch)
