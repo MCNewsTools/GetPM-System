@@ -16,3 +16,7 @@ system is not completed (系統未完成)
 * 下載完執行 `./select-lang.sh` 選擇語言
 * 下載完執行 `./select-core.sh` 選擇PM核心
 * 開始下載 **PocketMine-MP**
+
+### 目前已添加PM核心
+* [genisys](https://github.com/iTXTech/Genisys)
+* [pmb 生成核心](https://github.com/PEMapModder/pmwatch)
