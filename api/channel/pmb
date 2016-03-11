@@ -1,6 +1,6 @@
 {
-    "version": "master",
-    "api_version": "unknown",
+    "version": "1.6dev",
+    "api_version": "2.0.0",
     "build": unknown,
     "date": 1,
     "details_url": "http://pmt.mcpe.me/pmb",

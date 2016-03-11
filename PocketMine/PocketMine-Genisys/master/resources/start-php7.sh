@@ -42,7 +42,7 @@ if [ "$PHP_BINARY" == "" ]; then
 	elif type php 2>/dev/null; then
 		PHP_BINARY=$(type -p php)
 	else
-		echo "[ERROR] Couldn't find a working PHP binary, please use the installer."
+		echo "[ERROR] Couldn't find a working PHP 7 binary, please use the installer."
 		exit 1
 	fi
 fi

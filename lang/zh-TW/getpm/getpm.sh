@@ -3,17 +3,6 @@
 CHANNEL="stable"
 NAME="PocketMine-MP"
 
-LINUX_32_BUILD="PHP_7.0.3_x86_Linux"
-LINUX_64_BUILD="PHP_7.0.3_x86-64_Linux"
-CENTOS_32_BUILD="PHP_7.0.3_x86_CentOS"
-CENTOS_64_BUILD="PHP_7.0.3_x86-64_CentOS"
-MAC_32_BUILD="PHP_7.0.3_x86_MacOS"
-MAC_64_BUILD="PHP_7.0.3_x86-64_MacOS"
-RPI_BUILD="PHP_5.6.10_ARM_Raspbian_hard"
-# Temporal build
-ODROID_BUILD="PHP_5.6.10_ARM_Raspbian_hard"
-AND_BUILD="PHP_7.0.0RC3_ARMv7_Android"
-IOS_BUILD="PHP_5.5.13_ARMv6_iOS"
 update=off
 forcecompile=off
 alldone=no
@@ -59,6 +48,7 @@ while getopts "arxucid:v:" opt; do
   esac
 done
 
+rm select-core.sh
 
 #Needed to use aliases
 shopt -s expand_aliases
@@ -185,8 +175,10 @@ rm -f "$NAME.phar"
 rm -f README.md
 rm -f CONTRIBUTING.md
 rm -f LICENSE
-rm -f start.sh
 rm -f start.bat
+rm -f start.sh
+rm -f start-php7.sh
+rm -f start-php5.sh
 
 #Old installations
 rm -f PocketMine-MP.php
@@ -202,11 +194,14 @@ if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; 
 	exit 1
 else
 	if [ "$CHANNEL" == "soft" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start.sh" > start.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php5.sh" > start-php5.sh
 	elif [ "$CHANNEL" == "genisys" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Genisys/master/resources/start.sh" > start.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Genisys/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Genisys/master/resources/start-php5.sh" > start-php5.sh
 	else
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start.sh" > start.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
 	fi
 	download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/LICENSE" > LICENSE
 	download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/README.md" > README.md
@@ -215,7 +210,8 @@ else
 fi
 
 chmod +x compile.sh
-chmod +x start.sh
+chmod +x start-php7.sh
+chmod +x start-php5.sh
 
 echo " 完成！"
 
@@ -224,227 +220,13 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	check_signature "$NAME.phar"
 fi
 
-if [ "$update" == "on" ]; then
-	echo "[3/3] 按照用戶的要求，正在跳過 PHP 重新編譯程序"
-else
-	echo -n "[3/3] 正在獲取 PHP:"
-	echo " 正在檢查是否有可用的建構檔..."
-	if [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Darwin" ]; then
-		set +e
-		UNAME_M=$(uname -m)
-		IS_IOS=$(expr match $UNAME_M 'iP[a-zA-Z0-9,]*' 2> /dev/null)
-		set -e
-		if [[ "$IS_IOS" -gt 0 ]]; then
-			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] 發現可用的 iOS PHP 建構檔，正在下載 $IOS_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
-			chmod +x ./bin/php7/bin/*
-			echo -n " 正在進行檢查..."
-			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " 正在重新生成 php.ini..."
-				TIMEZONE=$(date +%Z)
-				echo "" > "./bin/php7/bin/php.ini"
-				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
-				#echo "zend_extension=\"$UOPZ_PATH\"" >> "./bin/php7/bin/php.ini"
-				echo "date.timezone=$TIMEZONE" >> "./bin/php7/bin/php.ini"
-				echo "short_open_tag=0" >> "./bin/php7/bin/php.ini"
-				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " 完成"
-				alldone=yes
-			else
-				echo " 檢測到無效的建構檔"
-			fi
-		else
-			rm -r -f bin/ >> /dev/null 2>&1
-			if [ `getconf LONG_BIT` == "64" ]; then
-				echo -n "[3/3] 發現可用的 MacOS 64位元 PHP 建構檔，正在下載 $MAC_64_BUILD.tar.gz..."
-				MAC_BUILD="$MAC_64_BUILD"
-			else
-				echo -n "[3/3] 發現可用的 MacOS 32位元 PHP 建構檔，正在下載 $MAC_32_BUILD.tar.gz..."
-				MAC_BUILD="$MAC_32_BUILD"
-			fi
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
-			chmod +x ./bin/php7/bin/*
-			echo -n " 正在進行檢查..."
-			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " 正在重新生成 php.ini..."
-				TIMEZONE=$(date +%Z)
-				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
-				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
-				echo "" > "./bin/php7/bin/php.ini"
-				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
-				#echo "zend_extension=\"$UOPZ_PATH\"" >> "./bin/php7/bin/php.ini"
-				#echo "zend_extension=\"$OPCACHE_PATH\"" >> "./bin/php7/bin/php.ini"
-				if [ "$XDEBUG" == "on" ]; then
-					echo "zend_extension=\"$XDEBUG_PATH\"" >> "./bin/php7/bin/php.ini"
-				fi
-				echo "opcache.enable=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.enable_cli=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.save_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.load_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.fast_shutdown=0" >> "./bin/php7/bin/php.ini"
-				echo "opcache.max_accelerated_files=4096" >> "./bin/php7/bin/php.ini"
-				echo "opcache.interned_strings_buffer=8" >> "./bin/php7/bin/php.ini"
-				echo "opcache.memory_consumption=128" >> "./bin/php7/bin/php.ini"
-				echo "opcache.optimization_level=0xffffffff" >> "./bin/php7/bin/php.ini"
-				echo "date.timezone=$TIMEZONE" >> "./bin/php7/bin/php.ini"
-				echo "short_open_tag=0" >> "./bin/php7/bin/php.ini"
-				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " 完成"
-				alldone=yes
-			else
-				echo " 檢測到無效的建構檔"
-			fi
-		fi
-	else
-		grep -q BCM270[89] /proc/cpuinfo > /dev/null 2>&1
-		IS_RPI=$?
-		grep -q sun7i /proc/cpuinfo > /dev/null 2>&1
-		IS_BPI=$?
-		grep -q ODROID /proc/cpuinfo > /dev/null 2>&1
-		IS_ODROID=$?
-		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
-			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] 發現可用的 Raspberry Pi PHP 建構檔，正在下載 $RPI_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
-			chmod +x ./bin/php7/bin/*
-			echo -n " 正在進行檢查..."
-			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " 正在重新生成 php.ini..."
-				TIMEZONE=$(date +%Z)
-				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
-				if [ "$XDEBUG" == "on" ]; then
-					echo "zend_extension=\"$XDEBUG_PATH\"" >> "./bin/php7/bin/php.ini"
-				fi
-				echo "" > "./bin/php7/bin/php.ini"
-				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
-				#echo "zend_extension=\"$UOPZ_PATH\"" >> "./bin/php7/bin/php.ini"
-				#echo "zend_extension=\"$OPCACHE_PATH\"" >> "./bin/php7/bin/php.ini"
-				if [ "$XDEBUG" == "on" ]; then
-					echo "zend_extension=\"$XDEBUG_PATH\"" >> "./bin/php7/bin/php.ini"
-				fi
-				echo "opcache.enable=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.enable_cli=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.save_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.load_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.fast_shutdown=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.max_accelerated_files=4096" >> "./bin/php7/bin/php.ini"
-				echo "opcache.interned_strings_buffer=8" >> "./bin/php7/bin/php.ini"
-				echo "opcache.memory_consumption=128" >> "./bin/php7/bin/php.ini"
-				echo "opcache.optimization_level=0xffffffff" >> "./bin/php7/bin/php.ini"
-				echo "date.timezone=$TIMEZONE" >> "./bin/php7/bin/php.ini"
-				echo "short_open_tag=0" >> "./bin/php7/bin/php.ini"
-				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " 完成"
-				alldone=yes
-			else
-				echo " 檢測到無效的建構檔"
-			fi
-		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
-			rm -r -f bin/ >> /dev/null 2>&1
-			echo -n "[3/3] 發現可用的 ODROID PHP 建構檔，正在下載 $ODROID_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
-			chmod +x ./bin/php7/bin/*
-			echo -n " 正在進行檢查..."
-			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " 正在重新生成 php.ini..."
-				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
-				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
-				echo "" > "./bin/php7/bin/php.ini"
-				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
-				#echo "zend_extension=\"$UOPZ_PATH\"" >> "./bin/php7/bin/php.ini"
-				#echo "zend_extension=\"$OPCACHE_PATH\"" >> "./bin/php7/bin/php.ini"
-				if [ "$XDEBUG" == "on" ]; then
-					echo "zend_extension=\"$XDEBUG_PATH\"" >> "./bin/php7/bin/php.ini"
-				fi
-				echo "opcache.enable=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.enable_cli=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.save_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.load_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.fast_shutdown=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.max_accelerated_files=4096" >> "./bin/php7/bin/php.ini"
-				echo "opcache.interned_strings_buffer=8" >> "./bin/php7/bin/php.ini"
-				echo "opcache.memory_consumption=128" >> "./bin/php7/bin/php.ini"
-				echo "opcache.optimization_level=0xffffffff" >> "./bin/php7/bin/php.ini"
-				echo "date.timezone=$TIMEZONE" >> "./bin/php7/bin/php.ini"
-				echo "short_open_tag=0" >> "./bin/php7/bin/php.ini"
-				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " 完成"
-				alldone=yes
-			else
-				echo " 檢測到無效的建構檔"
-			fi
-		elif [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Linux" ]; then
-			rm -r -f bin/ >> /dev/null 2>&1
-			
-			if [[ "$(cat /etc/redhat-release 2>/dev/null)" == *CentOS* ]]; then
-				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/3] 發現可用的 CentOS 64位元 PHP 建構檔，正在下載 $CENTOS_64_BUILD.tar.gz..."
-					LINUX_BUILD="$CENTOS_64_BUILD"
-				else
-					echo -n "[3/3] 發現可用的 CentOS 32位元 PHP 建構檔，正在下載 $CENTOS_32_BUILD.tar.gz..."
-					LINUX_BUILD="$CENTOS_32_BUILD"
-				fi
-			else
-				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/3] 發現可用的 Linux 64位元 PHP 建構檔，正在下載 $LINUX_64_BUILD.tar.gz..."
-					LINUX_BUILD="$LINUX_64_BUILD"
-				else
-					echo -n "[3/3] 發現可用的 Linux 32位元 PHP 建構檔，正在下載 $LINUX_32_BUILD.tar.gz..."
-					LINUX_BUILD="$LINUX_32_BUILD"
-				fi
-			fi
-			
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
-			chmod +x ./bin/php7/bin/*
-			echo -n " 正在進行檢查..."
-			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
-				echo -n " 正在重新生成 php.ini..."
-				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
-				XDEBUG_PATH="$(find $(pwd) -name xdebug.so)"
-				echo "" > "./bin/php7/bin/php.ini"
-				#UOPZ_PATH="$(find $(pwd) -name uopz.so)"
-				#echo "zend_extension=\"$UOPZ_PATH\"" >> "./bin/php7/bin/php.ini"
-				#echo "zend_extension=\"$OPCACHE_PATH\"" >> "./bin/php7/bin/php.ini"
-				if [ "$XDEBUG" == "on" ]; then
-					echo "zend_extension=\"$XDEBUG_PATH\"" >> "./bin/php7/bin/php.ini"
-				fi
-				echo "opcache.enable=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.enable_cli=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.save_comments=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.fast_shutdown=1" >> "./bin/php7/bin/php.ini"
-				echo "opcache.max_accelerated_files=4096" >> "./bin/php7/bin/php.ini"
-				echo "opcache.interned_strings_buffer=8" >> "./bin/php7/bin/php.ini"
-				echo "opcache.memory_consumption=128" >> "./bin/php7/bin/php.ini"
-				echo "opcache.optimization_level=0xffffffff" >> "./bin/php7/bin/php.ini"
-				echo "date.timezone=$TIMEZONE" >> "./bin/php7/bin/php.ini"
-				echo "short_open_tag=0" >> "./bin/php7/bin/php.ini"
-				echo "asp_tags=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.readonly=0" >> "./bin/php7/bin/php.ini"
-				echo "phar.require_hash=1" >> "./bin/php7/bin/php.ini"
-				echo " 完成"
-				alldone=yes
-			else
-				echo " 檢測到無效的建構檔，請更新你的作業系統"
-			fi
-		fi
-		if [ "$alldone" == "no" ]; then
-			set -e
-			echo "[3/3] 找不到可用的建構檔，正在自動編譯 PHP"
-			exec "./compile.sh"
-		fi
-	fi
-fi
-
+wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php7/ | bash
+wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php5/ | bash
 rm compile.sh
 
-echo "[*] 完成！輸入 ./start.sh 以運行 $NAME"
+echo "[*] =========================================="
+echo "[*] 完成！"
+echo "[*] PHP7 輸入 ./start-php7.sh"
+echo "[*] PHP5 輸入 ./start-php5.sh"
+echo "[*] 以運行 $NAME"
 exit 0

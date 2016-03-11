@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+rm select-lang.sh
 echo "Select PocketMine Core"
 echo "（1）genisys (0.14 | PHP7)"
 echo "（2）pmb (0.14 | PHP5)"
