@@ -1,9 +1,9 @@
 {
     "version": "1.1dev",
     "api_version": "2.0.0",
-    "build": 123,
-    "date": 03/08_12:48_CST_2016
-    "details_url": "http://jenkins.mcper.cn/job/Genisys-master/123/",
-    "download_url": "http://jenkins.mcper.cn/job/Genisys-master/123/artifact/artifact/Genisys-master_Jenkins_%23123.phar",
-    "alternate_download_url": "http://jenkins.mcper.cn/job/Genisys-master/123/artifact/artifact/Genisys-master_Jenkins_%23123.phar",
+    "build": 137,
+    "date": 03/13_12:24:55_CST_2016
+    "details_url": "http://jenkins.mcper.cn/job/Genisys-master/137/",
+    "download_url": "http://jenkins.mcper.cn/job/Genisys-master/137/artifact/artifact/Genisys-master_Jenkins_%23137.phar",
+    "alternate_download_url": "http://jenkins.mcper.cn/job/Genisys-master/137/artifact/artifact/Genisys-master_Jenkins_%23137.phar",
 }
