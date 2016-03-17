@@ -11,7 +11,7 @@
 
 ## 繁體中文
 
-* 隨時更新的非官方 wget PocketMine-MP 下載伺服器
+* 非官方 wget PocketMine-MP 下載伺服器
 
 ### 用法
 * 執行 `wget -q -O - http://getpm.reh.tw/ | bash`
