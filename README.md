@@ -7,6 +7,14 @@ system is not completed (系統未完成)
 
 ## English
 
+* Non-offical "wget PocketMine-MP" download server.
+
+### Usage
+* Run command `wget -q -O - http://getpm.reh.tw/ | bash`.
+* Then run `./select-lang.sh` to choose language.
+* Run `./select-core.sh` to choose PM's core version.
+* Start download your custom PocketMone-MP server.
+
 ## 繁體中文
 
 * 隨時更新的非官方 wget PocketMine-MP 下載伺服器
