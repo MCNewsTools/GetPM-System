@@ -68,15 +68,20 @@ else
 			alias download_file="curl --silent --location"
 		fi
 	else
+	    printf "\33[0;91m"
 		echo "error, curl or wget not found"
+		printf "\33[0m"
 	fi
 fi
 
 if [ "$CHANNEL" == "soft" ]; then
 	NAME="PocketMine-Soft"
 fi
-if [ "$CHANNEL" == "genisys" ]; then
-	NAME="PocketMine-Genisys"
+if [ "$CHANNEL" == "Genisys" ]; then
+	NAME="Genisys"
+fi
+if [ "$CHANNEL" == "ClearSky" ]; then
+	NAME="ClearSky"
 fi
 
 ENABLE_GPG="no"
@@ -123,7 +128,14 @@ if [ "$GPG_SIGNATURE" != "" ]; then
 fi
 
 if [ "$VERSION" == "" ]; then
-	echo "[!] Couldn't get the latest $NAME version"
+	printf "\33[0;91m"
+	echo -n "[!] Couldn't get the latest"
+	printf "\33[0;96m"
+	echo -n " $NAME"
+	printf "\33[0m"
+	printf "\33[0;91m"
+	echo " version"
+	printf "\33[0m"
 	exit 1
 fi
 
@@ -154,9 +166,35 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	fi
 fi
 
-echo "[*] Found $NAME $BASE_VERSION (build $BUILD) using API $API_VERSION"
-echo "[*] This $CHANNEL build was released on $VERSION_DATE"
-echo "[*] Details: $VERSION_DETAILS"
+echo -n "[*] Found"
+printf "\33[0;96m"
+echo -n " $NAME"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n " $BASE_VERSION"
+printf "\33[0m"
+echo -n " (build"
+printf "\33[0;92m"
+echo -n " $BUILD"
+printf "\33[0m"
+echo -n ") using API"
+printf "\33[0;91m"
+echo " $API_VERSION"
+printf "\33[0m"
+
+echo -n "[*] This"
+printf "\33[0;96m"
+echo -n " $CHANNEL"
+printf "\33[0m"
+echo -n " build was released on"
+printf "\33[0;92m"
+echo " $VERSION_DATE"
+printf "\33[0m"
+
+echo -n "[*] Details:"
+printf "\33[0;92m"
+echo " $VERSION_DETAILS"
+printf "\33[0m"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
 	echo "[+] The build was signed, will check signature"
@@ -166,10 +204,32 @@ elif [ "$GPG_SIGNATURE" == "" ]; then
 	fi
 fi
 
-echo "[*] Installing/updating $NAME on directory $INSTALL_DIRECTORY"
+echo -n "[*] Installing/updating"
+printf "\33[0;96m"
+echo -n " $NAME"
+printf "\33[0m"
+echo -n " on directory"
+printf "\33[0;92m"
+echo " $INSTALL_DIRECTORY"
+printf "\33[0m"
 mkdir -m 0777 "$INSTALL_DIRECTORY" 2> /dev/null
 cd "$INSTALL_DIRECTORY"
-echo "[1/3] Cleaning..."
+printf "\33[0;93m"
+echo -n "["
+printf "\33[0m"
+printf "\33[0;92m"
+echo -n "1"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n "/"
+printf "\33[0m"
+printf "\33[0;91m"
+echo -n "4"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n "]"
+printf "\33[0m"
+echo " Cleaning..."
 rm -f "$NAME.phar"
 rm -f README.md
 rm -f CONTRIBUTING.md
@@ -183,21 +243,55 @@ rm -f start-php5.sh
 rm -f PocketMine-MP.php
 rm -r -f src/
 
-echo -n "[2/3] Downloading $NAME $VERSION phar..."
+printf "\33[0;93m"
+echo -n "["
+printf "\33[0m"
+printf "\33[0;92m"
+echo -n "1"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n "/"
+printf "\33[0m"
+printf "\33[0;91m"
+echo -n "4"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n "]"
+printf "\33[0m"
+echo -n " Downloading"
+printf "\33[0;96m"
+echo -n " $NAME"
+printf "\33[0m"
+printf "\33[0;93m"
+echo -n " $VERSION"
+printf "\33[0m"
+echo -n " phar..."
 set +e
 download_file "$VERSION_DOWNLOAD" > "$NAME.phar"
 if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; then
 	rm "$NAME.phar" 2> /dev/null
-	echo " failed!"
-	echo "[!] Couldn't download $NAME automatically from $VERSION_DOWNLOAD"
+	printf "\33[0;91m"
+	echo " failed！"
+	printf "\33[0m"
+	echo -n "[!] Couldn't download"
+	printf "\33[0;96m"
+	echo -n " $NAME"
+	printf "\33[0m"
+	echo -n " automatically from"
+	printf "\33[0;93m"
+	echo " $VERSION_DOWNLOAD"
+	printf "\33[0m"
 	exit 1
 else
 	if [ "$CHANNEL" == "soft" ]; then
 		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php7.sh" > start-php7.sh
 		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php5.sh" > start-php5.sh
-	elif [ "$CHANNEL" == "genisys" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Genisys/master/resources/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Genisys/master/resources/start-php5.sh" > start-php5.sh
+	elif [ "$CHANNEL" == "Genisys" ]; then
+		download_file "http://getpm.reh.tw/PocketMine/Genisys/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.reh.tw/PocketMine/Genisys/master/resources/start-php5.sh" > start-php5.sh
+	elif [ "$CHANNEL" == "ClearSky" ]; then
+		download_file "http://getpm.reh.tw/PocketMine/ClearSky/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.reh.tw/PocketMine/ClearSky/master/resources/start-php5.sh" > start-php5.sh
 	else
 		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
 		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
@@ -212,7 +306,9 @@ chmod +x compile.sh
 chmod +x start-php7.sh
 chmod +x start-php5.sh
 
+printf "\33[0;92m"
 echo " done!"
+printf "\33[0m"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
 	download_file "$GPG_SIGNATURE" > "$NAME.phar.sig"
@@ -225,7 +321,27 @@ rm compile.sh
 
 echo "[*] =========================================="
 echo "[*] Everything done!"
-echo "[*] PHP7 Run ./start-php7.sh"
-echo "[*] PHP5 Run ./start-php5.sh"
-echo "[*] to start $NAME"
+
+echo -n "[*]"
+printf "\33[0;92m"
+echo -n " PHP7"
+printf "\33[0m"
+echo -n " Run"
+printf "\33[0;93m"
+echo " ./start-php7.sh"
+printf "\33[0m"
+
+echo -n "[*]"
+printf "\33[0;92m"
+echo -n " PHP5"
+printf "\33[0m"
+echo -n " Run"
+printf "\33[0;93m"
+echo " ./start-php5.sh"
+printf "\33[0m"
+
+echo -n "[*] to start"
+printf "\33[0;96m"
+echo " $NAME"
+printf "\33[0m"
 exit 0

@@ -18,7 +18,9 @@ else
 			alias download_file="curl --silent --location"
 		fi
 	else
+		printf "\33[0;91m"
 		echo "error, curl or wget not found"
+		printf "\33[0m"
 	fi
 fi
 
@@ -26,4 +28,9 @@ echo "Downloading select-lang.sh..."
 download_file "http://getpm.reh.tw/select-lang.sh" > select-lang.sh
 chmod +x select-lang.sh
 
-echo "[*] Done! Run ./select-lang.sh"
+printf "\33[0;91m"
+echo -n "[*] Done! Run"
+printf "\33[0m"
+printf "\33[0;92m"
+echo " ./select-lang.sh"
+printf "\33[0m"
