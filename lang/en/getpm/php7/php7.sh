@@ -79,9 +79,9 @@ else
 fi
 
 if [ "$update" == "on" ]; then
-	echo "[4/4] Skipping PHP recompilation due to user request"
+	echo "[3/4] Skipping PHP recompilation due to user request"
 else
-	echo -n "[4/4] Obtaining PHP7:"
+	echo -n "[3/4] Obtaining PHP7:"
 	echo " detecting if build is available..."
 	if [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Darwin" ]; then
 		set +e
@@ -90,7 +90,7 @@ else
 		set -e
 		if [[ "$IS_IOS" -gt 0 ]]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[4/4] iOS PHP build available, downloading $IOS_BUILD.tar.gz..."
+			echo -n "[3/4] iOS PHP build available, downloading $IOS_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
@@ -113,10 +113,10 @@ else
 		else
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			if [ `getconf LONG_BIT` == "64" ]; then
-				echo -n "[4/4] MacOS 64-bit PHP build available, downloading $MAC_64_BUILD.tar.gz..."
+				echo -n "[3/4] MacOS 64-bit PHP build available, downloading $MAC_64_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_64_BUILD"
 			else
-				echo -n "[4/4] MacOS 32-bit PHP build available, downloading $MAC_32_BUILD.tar.gz..."
+				echo -n "[3/4] MacOS 32-bit PHP build available, downloading $MAC_32_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_32_BUILD"
 			fi
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
@@ -163,7 +163,7 @@ else
 		IS_ODROID=$?
 		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[4/4] Raspberry Pi PHP build available, downloading $RPI_BUILD.tar.gz..."
+			echo -n "[3/4] Raspberry Pi PHP build available, downloading $RPI_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
@@ -202,7 +202,7 @@ else
 			fi
 		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[4/4] ODROID PHP build available, downloading $ODROID_BUILD.tar.gz..."
+			echo -n "[3/4] ODROID PHP build available, downloading $ODROID_BUILD.tar.gz..."
 			download_file "http://getpm.reh.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
@@ -241,18 +241,18 @@ else
 			
 			if [[ "$(cat /etc/redhat-release 2>/dev/null)" == *CentOS* ]]; then
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[4/4] CentOS 64-bit PHP build available, downloading $CENTOS_64_BUILD.tar.gz..."
+					echo -n "[3/4] CentOS 64-bit PHP build available, downloading $CENTOS_64_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_64_BUILD"
 				else
-					echo -n "[4/4] CentOS 32-bit PHP build available, downloading $CENTOS_32_BUILD.tar.gz..."
+					echo -n "[3/4] CentOS 32-bit PHP build available, downloading $CENTOS_32_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_32_BUILD"
 				fi
 			else
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[4/4] Linux 64-bit PHP build available, downloading $LINUX_64_BUILD.tar.gz..."
+					echo -n "[3/4] Linux 64-bit PHP build available, downloading $LINUX_64_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_64_BUILD"
 				else
-					echo -n "[4/4] Linux 32-bit PHP build available, downloading $LINUX_32_BUILD.tar.gz..."
+					echo -n "[3/4] Linux 32-bit PHP build available, downloading $LINUX_32_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_32_BUILD"
 				fi
 			fi
@@ -292,7 +292,7 @@ else
 		fi
 		if [ "$alldone" == "no" ]; then
 			set -e
-			echo "[4/4] no build found, compiling PHP automatically"
+			echo "[3/4] no build found, compiling PHP automatically"
 			exec "./compile.sh"
 		fi
 	fi
