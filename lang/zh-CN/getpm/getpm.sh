@@ -91,7 +91,7 @@ PUBLICKEY_LONGID="${PUBLICKEY_FINGERPRINT: -16}"
 GPG_KEYSERVER="pgp.mit.edu"
 
 function check_signature {
-	echo "[*] Checking signature of $1"
+	echo "[*] 检查签署 $1"
 	"$GPG_BIN" --keyserver "$GPG_KEYSERVER" --keyserver-options auto-key-retrieve=1 --trusted-key $PUBLICKEY_LONGID --verify "$1.sig" "$1"
 	if [ $? -eq 0 ]; then
 		echo "[+] 签署已被检查并确认为有效！"
