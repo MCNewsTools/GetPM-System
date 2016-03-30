@@ -27,5 +27,7 @@
 [更多的 PocketMine-MP PHP檔案](http://getpm.reh.tw/PocketMine/PHP/)
 
 ### 目前已添加PM核心
+* [PocketMine-MP](https://bintray.com/pocketmine/PocketMine/PocketMine-MP-phar/view#files)
 * [Genisys](https://github.com/iTXTech/Genisys)
 * [pmb 生成核心](http://pmt.mcpe.me/pmb/)
+* [ClearSky](https://github.com/ClearSkyTeam/ClearSky)
