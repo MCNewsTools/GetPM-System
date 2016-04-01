@@ -91,7 +91,7 @@ else
 		if [[ "$IS_IOS" -gt 0 ]]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			echo -n "[3/4] iOS PHP build available, downloading $IOS_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.techplayer.org/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -119,7 +119,7 @@ else
 				echo -n "[3/4] MacOS 32-bit PHP build available, downloading $MAC_32_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_32_BUILD"
 			fi
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.techplayer.org/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -164,7 +164,7 @@ else
 		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			echo -n "[3/4] Raspberry Pi PHP build available, downloading $RPI_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.techplayer.org/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -203,7 +203,7 @@ else
 		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			echo -n "[3/4] ODROID PHP build available, downloading $ODROID_BUILD.tar.gz..."
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.techplayer.org/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -257,7 +257,7 @@ else
 				fi
 			fi
 			
-			download_file "http://getpm.reh.tw/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.techplayer.org/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
 			echo -n " checking..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then

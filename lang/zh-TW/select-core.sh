@@ -45,13 +45,13 @@ printf "\33[0m"
 
 read character
 case $character in
-    1 ) wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/ | bash -s - -v PocketMine-MP
+    1 ) wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/ | bash -s - -v PocketMine-MP
         ;;
-    2 ) wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/ | bash -s - -v Genisys
+    2 ) wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/ | bash -s - -v Genisys
         ;;
-	3 ) wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/ | bash -s - -v ClearSky
+	3 ) wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/ | bash -s - -v ClearSky
         ;;
-    4 ) wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/ | bash -s - -v pmb
+    4 ) wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/ | bash -s - -v pmb
         ;;
     * ) printf "\33[0;91m"
 	    echo "請輸入正確的編號"

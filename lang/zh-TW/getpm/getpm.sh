@@ -85,7 +85,7 @@ if [ "$CHANNEL" == "ClearSky" ]; then
 fi
 
 ENABLE_GPG="no"
-PUBLICKEY_URL="http://getpm.reh.tw/pocketmine.asc"
+PUBLICKEY_URL="http://getpm.techplayer.org/pocketmine.asc"
 PUBLICKEY_FINGERPRINT="20D377AFC3F7535B3261AA4DCF48E7E52280B75B"
 PUBLICKEY_LONGID="${PUBLICKEY_FINGERPRINT: -16}"
 GPG_KEYSERVER="pgp.mit.edu"
@@ -102,7 +102,7 @@ function check_signature {
 	fi	
 }
 
-VERSION_DATA=$(download_file "http://getpm.reh.tw/api/channel/$CHANNEL")
+VERSION_DATA=$(download_file "http://getpm.techplayer.org/api/channel/$CHANNEL")
 
 VERSION=$(echo "$VERSION_DATA" | grep '"version"' | cut -d ':' -f2- | tr -d ' ",')
 BUILD=$(echo "$VERSION_DATA" | grep build | cut -d ':' -f2- | tr -d ' ",')
@@ -284,22 +284,22 @@ if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; 
 	exit 1
 else
 	if [ "$CHANNEL" == "soft" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-Soft/master/resources/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.techplayer.org/PocketMine/PocketMine-Soft/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.techplayer.org/PocketMine/PocketMine-Soft/master/resources/start-php5.sh" > start-php5.sh
 	elif [ "$CHANNEL" == "Genisys" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/Genisys/master/resources/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.reh.tw/PocketMine/Genisys/master/resources/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.techplayer.org/PocketMine/Genisys/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.techplayer.org/PocketMine/Genisys/master/resources/start-php5.sh" > start-php5.sh
 	elif [ "$CHANNEL" == "ClearSky" ]; then
-		download_file "http://getpm.reh.tw/PocketMine/ClearSky/master/resources/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.reh.tw/PocketMine/ClearSky/master/resources/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.techplayer.org/PocketMine/ClearSky/master/resources/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.techplayer.org/PocketMine/ClearSky/master/resources/start-php5.sh" > start-php5.sh
 	else
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.techplayer.org/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.techplayer.org/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
 	fi
-	download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/LICENSE" > LICENSE
-	download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/README.md" > README.md
-	download_file "http://getpm.reh.tw/PocketMine/PocketMine-MP/master/CONTRIBUTING.md" > CONTRIBUTING.md
-	download_file "http://getpm.reh.tw/PocketMine/php-build-scripts/master/compile.sh" > compile.sh
+	download_file "http://getpm.techplayer.org/PocketMine/PocketMine-MP/master/LICENSE" > LICENSE
+	download_file "http://getpm.techplayer.org/PocketMine/PocketMine-MP/master/README.md" > README.md
+	download_file "http://getpm.techplayer.org/PocketMine/PocketMine-MP/master/CONTRIBUTING.md" > CONTRIBUTING.md
+	download_file "http://getpm.techplayer.org/PocketMine/php-build-scripts/master/compile.sh" > compile.sh
 fi
 
 chmod +x compile.sh
@@ -315,8 +315,8 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	check_signature "$NAME.phar"
 fi
 
-wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php7/ | bash
-wget -q -O - http://getpm.reh.tw/lang/zh-TW/getpm/php5/ | bash
+wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/php7/ | bash
+wget -q -O - http://getpm.techplayer.org/lang/zh-TW/getpm/php5/ | bash
 rm compile.sh
 
 echo "[*] =========================================="
