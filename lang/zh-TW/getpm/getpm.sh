@@ -283,28 +283,35 @@ if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; 
 	printf "\33[0m"
 	exit 1
 else
-	if [ "$CHANNEL" == "soft" ]; then
-		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-Soft/master/resources/start-php7.sh" > start-php7.sh
-		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-Soft/master/resources/start-php5.sh" > start-php5.sh
+	if [ "$CHANNEL" == "PocketMine-MP" ]; then
+		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
+		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/LICENSE" > LICENSE
+		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/README.md" > README.md
+		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/CONTRIBUTING.md" > CONTRIBUTING.md
 	elif [ "$CHANNEL" == "Genisys" ]; then
 		download_file "http://getpm.mcpe.tw/PocketMine/Genisys/master/resources/start-php7.sh" > start-php7.sh
 		download_file "http://getpm.mcpe.tw/PocketMine/Genisys/master/resources/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.mcpe.tw/PocketMine/Genisys/master/resources/LICENSE" > LICENSE
+		download_file "http://getpm.mcpe.tw/PocketMine/Genisys/master/resources/README.md" > README.md
+		download_file "http://getpm.mcpe.tw/PocketMine/Genisys/master/resources/CONTRIBUTING.md" > CONTRIBUTING.md
 	elif [ "$CHANNEL" == "ClearSky" ]; then
 		download_file "http://getpm.mcpe.tw/PocketMine/ClearSky/master/resources/start-php7.sh" > start-php7.sh
 		download_file "http://getpm.mcpe.tw/PocketMine/ClearSky/master/resources/start-php5.sh" > start-php5.sh
+		download_file "http://getpm.mcpe.tw/PocketMine/ClearSky/master/resources/LICENSE" > LICENSE
+		download_file "http://getpm.mcpe.tw/PocketMine/ClearSky/master/resources/README.md" > README.md
 	else
 		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/start-php7.sh" > start-php7.sh
 		download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/start-php5.sh" > start-php5.sh
 	fi
-	download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/LICENSE" > LICENSE
-	download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/README.md" > README.md
-	download_file "http://getpm.mcpe.tw/PocketMine/PocketMine-MP/master/CONTRIBUTING.md" > CONTRIBUTING.md
 	download_file "http://getpm.mcpe.tw/PocketMine/php-build-scripts/master/compile.sh" > compile.sh
+	download_file "http://getpm.mcpe.tw/PocketMine/start.sh" > start.sh
 fi
 
 chmod +x compile.sh
 chmod +x start-php7.sh
 chmod +x start-php5.sh
+chmod +x start.sh
 
 printf "\33[0;92m"
 echo " 完成！"

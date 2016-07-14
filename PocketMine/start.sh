@@ -1,0 +1,18 @@
+#!/bin/bash
+echo -n "[*]"
+printf "\33[0;92m"
+echo -n " PHP7"
+printf "\33[0m"
+echo -n " Run"
+printf "\33[0;93m"
+echo " ./start-php7.sh"
+printf "\33[0m"
+
+echo -n "[*]"
+printf "\33[0;92m"
+echo -n " PHP5"
+printf "\33[0m"
+echo -n " Run"
+printf "\33[0;93m"
+echo " ./start-php5.sh"
+printf "\33[0m"
