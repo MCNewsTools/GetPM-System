@@ -25,7 +25,7 @@ else
 fi
 
 echo "Downloading select-lang.sh..."
-download_file "http://getpm.techplayer.org/select-lang.sh" > select-lang.sh
+download_file "http://getpm.mcpe.tw/select-lang.sh" > select-lang.sh
 chmod +x select-lang.sh
 
 printf "\33[0;91m"

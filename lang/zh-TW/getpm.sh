@@ -25,7 +25,7 @@ else
 fi
 
 echo "下載 select-core.sh..."
-download_file "http://getpm.techplayer.org/lang/zh-TW/select-core.sh" > select-core.sh
+download_file "http://getpm.mcpe.tw/lang/zh-TW/select-core.sh" > select-core.sh
 chmod +x select-core.sh
 
 printf "\33[0;91m"

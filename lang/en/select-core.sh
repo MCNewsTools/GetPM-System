@@ -11,7 +11,7 @@ echo -n "（1）"
 printf "\33[0m"
 echo -n "PocketMine-MP"
 printf "\33[0;91m"
-echo " (0.14 | PHP7)"
+echo " (0.15 | PHP7)"
 printf "\33[0m"
 
 printf "\33[0;93m"
@@ -19,7 +19,7 @@ echo -n "（2）"
 printf "\33[0m"
 echo -n "Genisys"
 printf "\33[0;91m"
-echo " (0.14 | PHP7)"
+echo " (0.15 | PHP7)"
 printf "\33[0m"
 
 printf "\33[0;93m"
@@ -27,15 +27,7 @@ echo -n "（3）"
 printf "\33[0m"
 echo -n "ClearSky"
 printf "\33[0;91m"
-echo " (0.14 | PHP5)"
-printf "\33[0m"
-
-printf "\33[0;93m"
-echo -n "（4）"
-printf "\33[0m"
-echo -n "pmb"
-printf "\33[0;91m"
-echo " (0.14 | PHP7)"
+echo " (0.15 | PHP7)"
 printf "\33[0m"
 
 echo "=========================================="
@@ -45,13 +37,11 @@ printf "\33[0m"
 
 read character
 case $character in
-    1 ) wget -q -O - http://getpm.techplayer.org/lang/en/getpm/ | bash -s - -v PocketMine-MP
+    1 ) wget -q -O - http://getpm.mcpe.tw/lang/en/getpm/ | bash -s - -v PocketMine-MP
         ;;
-    2 ) wget -q -O - http://getpm.techplayer.org/lang/en/getpm/ | bash -s - -v Genisys
+    2 ) wget -q -O - http://getpm.mcpe.tw/lang/en/getpm/ | bash -s - -v Genisys
         ;;
-	3 ) wget -q -O - http://getpm.techplayer.org/lang/en/getpm/ | bash -s - -v ClearSky
-        ;;
-    4 ) wget -q -O - http://getpm.techplayer.org/lang/en/getpm/ | bash -s - -v pmb
+	3 ) wget -q -O - http://getpm.mcpe.tw/lang/en/getpm/ | bash -s - -v ClearSky
         ;;
     * ) printf "\33[0;91m"
 	    echo "Please enter the correct number"

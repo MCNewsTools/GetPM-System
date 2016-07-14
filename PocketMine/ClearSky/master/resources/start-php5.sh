@@ -28,7 +28,7 @@ if [ "$PHP_BINARY" == "" ]; then
 	elif [ type php 2>/dev/null ]; then
 		PHP_BINARY=$(type -p php)
 	else
-		echo "Couldn't find a working PHP binary, please use the installer."
+		echo "Couldn't find a working PHP 5 binary, please use the installer."
 		exit 1
 	fi
 fi

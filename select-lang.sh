@@ -36,11 +36,11 @@ printf "\33[0m"
 
 read character
 case $character in
-    1 ) wget -q -O - http://getpm.techplayer.org/lang/en/ | bash
+    1 ) wget -q -O - http://getpm.mcpe.tw/lang/en/ | bash
         ;;
-    2 ) wget -q -O - http://getpm.techplayer.org/lang/zh-TW/ | bash
+    2 ) wget -q -O - http://getpm.mcpe.tw/lang/zh-TW/ | bash
         ;;
-    3 ) wget -q -O - http://getpm.techplayer.org/lang/zh-CN/ | bash
+    3 ) wget -q -O - http://getpm.mcpe.tw/lang/zh-CN/ | bash
         ;;
     * ) printf "\33[0;91m"
 	    echo "Please enter the correct number"

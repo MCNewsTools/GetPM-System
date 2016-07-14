@@ -91,7 +91,7 @@ else
 		if [[ "$IS_IOS" -gt 0 ]]; then
 			rm -r -f bin/php5/ >> /dev/null 2>&1
 			echo -n "[4/4] 发现可用的 iOS PHP5 建构档，正在下载 $IOS_BUILD.tar.gz..."
-			download_file "http://getpm.techplayer.org/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php5/bin/*
 			echo -n " 正在进行检查..."
 			if [ "$(./bin/php5/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -119,7 +119,7 @@ else
 				echo -n "[4/4] 发现可用的 MacOS 32位元 PHP5 建构档，正在下载 $MAC_32_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_32_BUILD"
 			fi
-			download_file "http://getpm.techplayer.org/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php5/bin/*
 			echo -n " 正在进行检查..."
 			if [ "$(./bin/php5/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -164,7 +164,7 @@ else
 		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php5/ >> /dev/null 2>&1
 			echo -n "[4/4] 发现可用的 Raspberry Pi PHP5 建构档，正在下载 $RPI_BUILD.tar.gz..."
-			download_file "http://getpm.techplayer.org/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php5/bin/*
 			echo -n " 正在进行检查..."
 			if [ "$(./bin/php5/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -203,7 +203,7 @@ else
 		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php5/ >> /dev/null 2>&1
 			echo -n "[4/4] 发现可用的 ODROID PHP5 建构档，正在下载 $ODROID_BUILD.tar.gz..."
-			download_file "http://getpm.techplayer.org/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php5/bin/*
 			echo -n " 正在进行检查..."
 			if [ "$(./bin/php5/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
@@ -257,7 +257,7 @@ else
 				fi
 			fi
 			
-			download_file "http://getpm.techplayer.org/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
+			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php5/bin/*
 			echo -n " 正在进行检查..."
 			if [ "$(./bin/php5/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
