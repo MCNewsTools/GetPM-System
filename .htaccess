@@ -1,4 +1,4 @@
-DirectoryIndex getpm.sh index.html index.php php7.sh php5.sh
+DirectoryIndex getpm.sh index.html php7.sh php5.sh
 Options -Indexes
 
 <IfModule mod_rewrite.c>
