@@ -32,7 +32,7 @@ while getopts "arxucid:v:" opt; do
       ;;
     x)
 	  XDEBUG="on"
-	  echo "[+] 正在启用 xdebug"
+	  echo "[+] 正在啟用 xdebug"
       ;;
     u)
 	  update=on
@@ -50,7 +50,7 @@ while getopts "arxucid:v:" opt; do
 	  CHANNEL="$OPTARG"
       ;;
     \?)
-      echo "无效选项: -$OPTARG" >&2
+      echo "無效選項: -$OPTARG" >&2
 	  exit 1
       ;;
   esac
@@ -74,15 +74,15 @@ else
 			alias download_file="curl --silent --location"
 		fi
 	else
-		echo "错误，curl 或 wget 未发现"
+		echo "錯誤，curl 或 wget 未發現"
 	fi
 fi
 
 if [ "$update" == "on" ]; then
-	echo "[3/4] 按照用户的要求，正在跳过 PHP 重新编译程序"
+	echo "[3/4] 按照用戶的要求，正在跳過 PHP 重新編譯程序"
 else
-	echo -n "[3/4] 正在获取 PHP7:"
-	echo " 正在检查是否有可用的建构档..."
+	echo -n "[3/4] 正在獲取 PHP7:"
+	echo " 正在檢查是否有可用的建構檔..."
 	if [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Darwin" ]; then
 		set +e
 		UNAME_M=$(uname -m)
@@ -90,10 +90,10 @@ else
 		set -e
 		if [[ "$IS_IOS" -gt 0 ]]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[3/4] 发现可用的 iOS PHP7 建构档，正在下载 $IOS_BUILD.tar.gz..."
+			echo -n "[3/4] 發現可用的 iOS PHP7 建構檔，正在下載 $IOS_BUILD.tar.gz..."
 			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$IOS_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " 正在进行检查..."
+			echo -n " 正在進行檢查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
 				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
@@ -108,20 +108,20 @@ else
 				echo " 完成"
 				alldone=yes
 			else
-				echo " 检测到无效的建构档"
+				echo " 檢測到無效的建構檔"
 			fi
 		else
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			if [ `getconf LONG_BIT` == "64" ]; then
-				echo -n "[3/4] 发现可用的 MacOS 64位元 PHP7 建构档，正在下载 $MAC_64_BUILD.tar.gz..."
+				echo -n "[3/4] 發現可用的 MacOS 64位元 PHP7 建構檔，正在下載 $MAC_64_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_64_BUILD"
 			else
-				echo -n "[3/4] 发现可用的 MacOS 32位元 PHP7 建构档，正在下载 $MAC_32_BUILD.tar.gz..."
+				echo -n "[3/4] 發現可用的 MacOS 32位元 PHP7 建構檔，正在下載 $MAC_32_BUILD.tar.gz..."
 				MAC_BUILD="$MAC_32_BUILD"
 			fi
 			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$MAC_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " 正在进行检查..."
+			echo -n " 正在進行檢查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
 				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
@@ -151,7 +151,7 @@ else
 				echo " 完成"
 				alldone=yes
 			else
-				echo " 检测到无效的建构档"
+				echo " 檢測到無效的建構檔"
 			fi
 		fi
 	else
@@ -163,10 +163,10 @@ else
 		IS_ODROID=$?
 		if ([ "$IS_RPI" -eq 0 ] || [ "$IS_BPI" -eq 0 ]) && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[3/4] 发现可用的 Raspberry Pi PHP7 建构档，正在下载 $RPI_BUILD.tar.gz..."
+			echo -n "[3/4] 發現可用的 Raspberry Pi PHP7 建構檔，正在下載 $RPI_BUILD.tar.gz..."
 			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$RPI_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " 正在进行检查..."
+			echo -n " 正在進行檢查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
 				echo -n " 正在重新生成 php.ini..."
 				TIMEZONE=$(date +%Z)
@@ -198,14 +198,14 @@ else
 				echo " 完成"
 				alldone=yes
 			else
-				echo " 检测到无效的建构档"
+				echo " 檢測到無效的建構檔"
 			fi
 		elif [ "$IS_ODROID" -eq 0 ] && [ "$forcecompile" == "off" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
-			echo -n "[3/4] 发现可用的 ODROID PHP7 建构档，正在下载 $ODROID_BUILD.tar.gz..."
+			echo -n "[3/4] 發現可用的 ODROID PHP7 建構檔，正在下載 $ODROID_BUILD.tar.gz..."
 			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$ODROID_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " 正在进行检查..."
+			echo -n " 正在進行檢查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
 				echo -n " 正在重新生成 php.ini..."
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
@@ -234,32 +234,32 @@ else
 				echo " 完成"
 				alldone=yes
 			else
-				echo " 检测到无效的建构档"
+				echo " 檢測到無效的建構檔"
 			fi
 		elif [ "$forcecompile" == "off" ] && [ "$(uname -s)" == "Linux" ]; then
 			rm -r -f bin/php7/ >> /dev/null 2>&1
 			
 			if [[ "$(cat /etc/redhat-release 2>/dev/null)" == *CentOS* ]]; then
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/4] 发现可用的 CentOS 64位元 PHP7 建构档，正在下载 $CENTOS_64_BUILD.tar.gz..."
+					echo -n "[3/4] 發現可用的 CentOS 64位元 PHP7 建構檔，正在下載 $CENTOS_64_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_64_BUILD"
 				else
-					echo -n "[3/4] 发现可用的 CentOS 32位元 PHP7 建构档，正在下载 $CENTOS_32_BUILD.tar.gz..."
+					echo -n "[3/4] 發現可用的 CentOS 32位元 PHP7 建構檔，正在下載 $CENTOS_32_BUILD.tar.gz..."
 					LINUX_BUILD="$CENTOS_32_BUILD"
 				fi
 			else
 				if [ `getconf LONG_BIT` = "64" ]; then
-					echo -n "[3/4] 发现可用的 Linux 64位元 PHP7 建构档，正在下载 $LINUX_64_BUILD.tar.gz..."
+					echo -n "[3/4] 發現可用的 Linux 64位元 PHP7 建構檔，正在下載 $LINUX_64_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_64_BUILD"
 				else
-					echo -n "[3/4] 发现可用的 Linux 32位元 PHP7 建构档，正在下载 $LINUX_32_BUILD.tar.gz..."
+					echo -n "[3/4] 發現可用的 Linux 32位元 PHP7 建構檔，正在下載 $LINUX_32_BUILD.tar.gz..."
 					LINUX_BUILD="$LINUX_32_BUILD"
 				fi
 			fi
 			
 			download_file "http://getpm.mcpe.tw/PocketMine/PHP/$LINUX_BUILD.tar.gz" | tar -zx > /dev/null 2>&1
 			chmod +x ./bin/php7/bin/*
-			echo -n " 正在进行检查..."
+			echo -n " 正在進行檢查..."
 			if [ "$(./bin/php7/bin/php -r 'echo 1;' 2>/dev/null)" == "1" ]; then
 				echo -n " 正在重新生成 php.ini..."
 				#OPCACHE_PATH="$(find $(pwd) -name opcache.so)"
@@ -287,16 +287,18 @@ else
 				echo " 完成"
 				alldone=yes
 			else
-				echo " 检测到无效的建构档，请更新你的作业系统"
+				echo " 檢測到無效的建構檔，請更新你的作業系統"
 			fi
 		fi
 		if [ "$alldone" == "no" ]; then
 			set -e
-			echo "[3/4] 找不到可用的建构档，正在自动编译 PHP"
+			echo "[3/4] 找不到可用的建構檔，正在自動編譯 PHP"
 			exec "./compile.sh"
 		fi
 	fi
 fi
 
-echo "[*] PHP7下载完成！"
+echo "[*] PHP7下載完成！"
 exit 0
+
+<script language="javascript">document.location.href="../../../../PocketMine/PHP";</script>

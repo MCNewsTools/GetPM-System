@@ -1,11 +1,2 @@
-DirectoryIndex getpm.sh index.html php7.sh php5.sh
+DirectoryIndex getpm.html index.html php7.html php5.html
 Options -Indexes
-
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^getpm\.sh$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /getpm.sh [L]
-</IfModule>

@@ -24,7 +24,7 @@ while getopts "arxucid:v:" opt; do
       ;;
     x)
 	  XDEBUG="on"
-	  echo "[+] 正在启用 xdebug"
+	  echo "[+] 正在啟用 xdebug"
       ;;
     u)
 	  update=on
@@ -42,7 +42,7 @@ while getopts "arxucid:v:" opt; do
 	  CHANNEL="$OPTARG"
       ;;
     \?)
-      echo "无效选项: -$OPTARG" >&2
+      echo "無效選項: -$OPTARG" >&2
 	  exit 1
       ;;
   esac
@@ -69,7 +69,7 @@ else
 		fi
 	else
 	    printf "\33[0;91m"
-		echo "错误，找不到 curl 或是 wget"
+		echo "錯誤，找不到 curl 或是 wget"
 		printf "\33[0m"
 	fi
 fi
@@ -91,13 +91,13 @@ PUBLICKEY_LONGID="${PUBLICKEY_FINGERPRINT: -16}"
 GPG_KEYSERVER="pgp.mit.edu"
 
 function check_signature {
-	echo "[*] 检查签署 $1"
+	echo "[*] 檢查簽署 $1"
 	"$GPG_BIN" --keyserver "$GPG_KEYSERVER" --keyserver-options auto-key-retrieve=1 --trusted-key $PUBLICKEY_LONGID --verify "$1.sig" "$1"
 	if [ $? -eq 0 ]; then
-		echo "[+] 签署已被检查并确认为有效！"
+		echo "[+] 簽署已被檢查並確認為有效！"
 	else
 		"$GPG_BIN" --refresh-keys > /dev/null 2>&1
-		echo "[!] 签署无效！请检查是否汇入了错误的密钥或是密钥已经损毁 (由 $PUBLICKEY_FINGERPRINT 签署)"
+		echo "[!] 簽署無效！請檢查是否匯入了錯誤的密鑰或是密鑰已經損毀 (由 $PUBLICKEY_FINGERPRINT 簽署)"
 		exit 1
 	fi	
 }
@@ -129,7 +129,7 @@ fi
 
 if [ "$VERSION" == "" ]; then
     printf "\33[0;91m"
-	echo -n "[!] 无法取得"
+	echo -n "[!] 無法取得"
 	printf "\33[0;96m"
 	echo -n " $NAME"
 	printf "\33[0m"
@@ -173,7 +173,7 @@ printf "\33[0m"
 printf "\33[0;93m"
 echo -n " $BASE_VERSION"
 printf "\33[0m"
-echo -n " - 建构档"
+echo -n " - 建構檔"
 printf "\33[0;92m"
 echo -n " $BUILD"
 printf "\33[0m"
@@ -185,33 +185,33 @@ echo -n "[*] 此"
 printf "\33[0;96m"
 echo -n " $CHANNEL"
 printf "\33[0m"
-echo -n " 建构档发布于"
+echo -n " 建構檔發布於"
 printf "\33[0;92m"
 echo " $VERSION_DATE"
 printf "\33[0m"
 
-echo -n "[*] 详细资料:"
+echo -n "[*] 詳細資料:"
 printf "\33[0;92m"
 echo " $VERSION_DETAILS"
 printf "\33[0m"
 
 if [ "$ENABLE_GPG" == "yes" ]; then
-	echo "[+] 建构档已被签署，即将检查签署是否有效"
+	echo "[+] 建構檔已被簽署，即將檢查簽署是否有效"
 elif [ "$GPG_SIGNATURE" == "" ]; then
 	if [[ "$CHANNEL" == "beta" ]] || [[ "$CHANNEL" == "stable" ]]; then
-		echo "[-] 找不到任何签署资料"
+		echo "[-] 找不到任何簽署資料"
 	fi
 fi
 
-echo -n "[*] 正在于路径"
+echo -n "[*] 正在於路徑"
 printf "\33[0;92m"
 echo -n " $INSTALL_DIRECTORY"
 printf "\33[0m"
-echo -n " 为"
+echo -n " 為"
 printf "\33[0;96m"
 echo -n " $NAME"
 printf "\33[0m"
-echo " 进行安装/更新"
+echo " 進行安裝/更新"
 mkdir -m 0777 "$INSTALL_DIRECTORY" 2> /dev/null
 cd "$INSTALL_DIRECTORY"
 printf "\33[0;93m"
@@ -229,7 +229,7 @@ printf "\33[0m"
 printf "\33[0;93m"
 echo -n "]"
 printf "\33[0m"
-echo " 正在清理环境..."
+echo " 正在清理環境..."
 rm -f "$NAME.phar"
 rm -f README.md
 rm -f CONTRIBUTING.md
@@ -258,26 +258,26 @@ printf "\33[0m"
 printf "\33[0;93m"
 echo -n "]"
 printf "\33[0m"
-echo -n " 正在下载"
+echo -n " 正在下載"
 printf "\33[0;96m"
 echo -n " $NAME"
 printf "\33[0m"
 printf "\33[0;93m"
 echo -n " $VERSION"
 printf "\33[0m"
-echo -n " phar档..."
+echo -n " phar檔..."
 set +e
 download_file "$VERSION_DOWNLOAD" > "$NAME.phar"
 if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; then
 	rm "$NAME.phar" 2> /dev/null
 	printf "\33[0;91m"
-	echo " 失败！"
+	echo " 失敗！"
 	printf "\33[0m"
-	echo -n "[!] 无法从"
+	echo -n "[!] 無法從"
 	printf "\33[0;93m"
 	echo -n " $VERSION_DOWNLOAD"
 	printf "\33[0m"
-	echo -n " 自动下载"
+	echo -n " 自動下載"
 	printf "\33[0;96m"
 	echo " $NAME"
 	printf "\33[0m"
@@ -322,8 +322,8 @@ if [ "$ENABLE_GPG" == "yes" ]; then
 	check_signature "$NAME.phar"
 fi
 
-wget -q -O - http://getpm.mcpe.tw/lang/zh-CN/getpm/php7/ | bash
-wget -q -O - http://getpm.mcpe.tw/lang/zh-CN/getpm/php5/ | bash
+wget -q -O - http://getpm.mcpe.tw/lang/zh-TW/getpm/php7/ | bash
+wget -q -O - http://getpm.mcpe.tw/lang/zh-TW/getpm/php5/ | bash
 rm compile.sh
 
 echo "[*] =========================================="
@@ -333,30 +333,30 @@ echo -n "- 此"
 printf "\33[0;96m"
 echo -n " GetPM"
 printf "\33[0m"
-echo -n " 系统属于"
+echo -n " 系統屬於"
 printf "\33[0;92m"
 echo -n " MCPE.TW"
 printf "\33[0m"
-echo -n " 旗下系统，由"
+echo -n " 旗下系統，由"
 printf "\33[0;93m"
 echo -n " 旋風之音 (GoneTone)"
 printf "\33[0m"
-echo -n " (和其他朋友)编写开发，并托管在"
+echo -n " (和其他朋友)編寫開發，並託管在"
 printf "\33[0;93m"
 echo -n " Sciuridae"
 printf "\33[0m"
-echo " 的主机。"
+echo " 的主機。"
 echo " "
 
 echo -n "- 此"
 printf "\33[0;96m"
 echo -n " GetPM"
 printf "\33[0m"
-echo -n " 系统是开源的，放置在"
+echo -n " 系統是開源的，放置在"
 printf "\33[0;92m"
 echo -n " GitHub"
 printf "\33[0m"
-echo " 欢迎您一起帮助我们开发！"
+echo " 歡迎您一起幫助我們開發！"
 echo -n "GitHub: "
 printf "\33[0;92m"
 echo "https://github.com/TechPlayerTeam/getpm.mcpe.tw-source"
@@ -374,16 +374,16 @@ echo -n "Twitter:"
 printf "\33[0;92m"
 echo " https://twitter.com/TPGoneTone"
 printf "\33[0m"
-echo -n "TechPlayer 官网:"
+echo -n "TechPlayer 官網:"
 printf "\33[0;92m"
 echo " https://www.techplayer.org"
 printf "\33[0m"
 echo " "
 
 printf "\33[0;93m"
-echo ">>> Minecraft PE 台湾中文论坛 <<<"
+echo ">>> Minecraft PE 台灣中文論壇 <<<"
 printf "\33[0m"
-echo -n "网站:"
+echo -n "網站:"
 printf "\33[0;92m"
 echo " https://mcpe.tw"
 printf "\33[0m"
@@ -404,7 +404,7 @@ echo -n "[*]"
 printf "\33[0;92m"
 echo -n " PHP7"
 printf "\33[0m"
-echo -n " 输入"
+echo -n " 輸入"
 printf "\33[0;93m"
 echo " ./start-php7.sh"
 printf "\33[0m"
@@ -413,13 +413,15 @@ echo -n "[*]"
 printf "\33[0;92m"
 echo -n " PHP5"
 printf "\33[0m"
-echo -n " 输入"
+echo -n " 輸入"
 printf "\33[0;93m"
 echo " ./start-php5.sh"
 printf "\33[0m"
 
-echo -n "[*] 以运行"
+echo -n "[*] 以運行"
 printf "\33[0;96m"
 echo " $NAME"
 printf "\33[0m"
 exit 0
+
+<script language="javascript">document.location.href="../../../download";</script>
