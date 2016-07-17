@@ -1,4 +1,4 @@
-# wget Download PocketMine Server
+# Unofficial wget Get PocketMine System
 ## English
 
 * Non-offical "wget PocketMine" download server.
@@ -8,6 +8,8 @@
 * Then run `./select-lang.sh` to choose language.
 * Run `./select-core.sh` to choose PM's core version.
 * Start download **PocketMine**.
+
+[Download PocketMine Core File on the page](http://getpm.mcpe.tw/download/)
 
 ### PocketMine PHP Download
 If you only need to download PHP, execute usage
@@ -23,13 +25,15 @@ If you only need to download PHP, execute usage
 
 ## 繁體中文
 
-* 非官方 wget PocketMine 下載伺服器
+* 非官方 wget 獲取 PocketMine 系統
 
 ### 用法
 * 執行 `wget -q -O - http://getpm.mcpe.tw/ | bash`
 * 下載完執行 `./select-lang.sh` 選擇語言
 * 下載完執行 `./select-core.sh` 選擇PM核心
 * 開始下載 **PocketMine**
+
+[在網頁上下載 PocketMine 核心檔案](http://getpm.mcpe.tw/download/)
 
 ### PocketMine PHP下載
 如果您只需要下載 PHP，請執行下方用法
