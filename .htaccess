@@ -1,6 +1,10 @@
-DirectoryIndex getpm.html index.html php7.html php5.html
+DirectoryIndex index.php getpm.sh php7.sh php5.sh
 Options -Indexes
 
-ErrorDocument 403 /Error/403.html
-ErrorDocument 404 /Error/404.html
-ErrorDocument 500 /Error/500.html
+RewriteEngine On 
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://getpm.reh.tw/$1 [R,L]
+
+ErrorDocument 403 /page/error/403.php
+ErrorDocument 404 /page/error/404.php
+ErrorDocument 500 /page/error/500.php

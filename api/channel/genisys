@@ -1,9 +1,0 @@
-{
-    "version": "1.2dev",
-    "api_version": "2.0.0",
-    "build": 621,
-    "date": 2016/07/08
-    "details_url": "https://jenkins.mcper.cn/job/Genisys-master/",
-    "download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/Genisys/Genisys_1.2dev-621.phar",
-    "alternate_download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/Genisys/Genisys_1.2dev-621.phar",
-}

@@ -1,9 +1,0 @@
-{
-    "version": "1.1dev",
-    "api_version": "2.0.0",
-    "build": 117,
-    "date": 2016/07/08,
-    "details_url": "http://jenkins.clearskyteam.org/job/ClearSky-php7/",
-    "download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/ClearSky/ClearSky-php7-117.phar",
-    "alternate_download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/ClearSky/ClearSky-php7-117.phar",
-}

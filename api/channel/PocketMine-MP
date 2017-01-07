@@ -1,9 +1,0 @@
-{
-    "version": "1.6dev",
-    "api_version": "2.0.0",
-    "build": 27,
-    "date": 2016/06/16,
-    "details_url": "https://bintray.com/pocketmine/PocketMine/PocketMine-MP-phar/view#files",
-    "download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/PocketMine-MP/PocketMine-MP_1.6dev-27_ef8227a0_API-2.0.0.phar.phar",
-    "alternate_download_url": "http://getpm.mcpe.tw/api/channel/phar/0.15/PocketMine-MP/PocketMine-MP_1.6dev-27_ef8227a0_API-2.0.0.phar.phar",
-}
