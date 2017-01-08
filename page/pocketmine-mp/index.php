@@ -78,11 +78,88 @@ $json_decode = json_decode($info, true);
         </div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-primary" href="<?php echo $json_decode['download_url']; ?>"><?php echo '下載 Genisys_'.$json_decode['version'].'-'.$json_decode['build'].'_API-'.$json_decode['api_version'].'.phar'; ?></a>
+            <a class="btn btn-primary" href="<?php echo $json_decode['download_url']; ?>"><?php echo '下載 PocketMine-MP_'.$json_decode['version'].'-'.$json_decode['build'].'_API-'.$json_decode['api_version'].'.phar'; ?></a>
           </div>
         </div>
       </div>
     </div>
+	<div class="section section-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>取得 PHP</h1>
+            <p>運行 PocketMine 需要安裝 PHP (<a href="../../PocketMine/PHP/" target="_blank">點我前往</a>) - <font color="red">指令安裝無需自行下載</font></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-success">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Linux / macOS 指令安裝</h1>
+            <p class="lead">
+              <b>English</b>
+            </p>
+            <pre>wget -q -O - https://getpm.reh.tw/en-US/ | bash -s - -v PocketMine-MP</pre>
+            <pre>curl -sL https://getpm.reh.tw/en-US/ | bash -s - -v PocketMine-MP</pre>
+            <br>
+            <p class="lead">
+              <b>繁體中文</b>
+            </p>
+            <pre>wget -q -O - https://getpm.reh.tw/zh-TW/ | bash -s - -v PocketMine-MP</pre>
+            <pre>curl -sL https://getpm.reh.tw/zh-TW/ | bash -s - -v PocketMine-MP</pre>
+            <br>
+            <p class="lead">
+              <b>简体中文</b>
+            </p>
+            <pre>wget -q -O - https://getpm.reh.tw/zh-CN/ | bash -s - -v PocketMine-MP</pre>
+            <pre>curl -sL https://getpm.reh.tw/zh-CN/ | bash -s - -v PocketMine-MP</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="section section-danger">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>GetPM System</h1>
+            <p>此系統屬於 <a href="https://mc.reh.tw/" target="_blank">Minecraft 資訊工具網</a> 旗下系統
+              <br>由 <a href="https://www.facebook.com/TPGoneTone/" target="_blank">旋風之音 (GoneTone)</a> (和其他朋友)編寫開發
+              <br>此 GetPM 系統是開源的，放置在 <a href="https://github.com/MCNewsTools/getpm.mcpe.tw-source/" target="_blank">GitHub</a> 歡迎您一起幫助我們開發！</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="text-info text-right">
+              <br>
+              <br>
+            </p>
+            <div class="row">
+              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                <a href="https://mc.reh.tw/" target="_blank"><i class="fa fa-3x fa-fw text-inverse fa-globe"></i></a>
+                <a href="https://www.facebook.com/MCNewsTools/" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="https://twitter.com/MCNewsTools/" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="https://github.com/MCNewsTools/getpm.mcpe.tw-source/" target="_blank"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 hidden-xs text-right">
+                <a href="https://mc.reh.tw/" target="_blank"><i class="fa fa-3x fa-fw text-inverse fa-globe"></i></a>
+                <a href="https://www.facebook.com/MCNewsTools/" target="_blank"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="https://twitter.com/MCNewsTools/" target="_blank"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="https://github.com/MCNewsTools/getpm.mcpe.tw-source/" target="_blank"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   
 
 </body></html>
